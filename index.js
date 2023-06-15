@@ -1,8 +1,10 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 /*
 app.use(morgan('tiny',{skip: function(req,res){
@@ -21,22 +23,22 @@ app.use(morgan(":method :url :status :res[content-length] - response-time ms :da
 let entries = [
     {
         "id": 1,
-        "content": "Arto Hellas",
+        "name": "Arto Hellas",
         "number":"040-123456"
     },
     {
         "id": 2,
-        "content": "Ada Lovelace",
+        "name": "Ada Lovelace",
         "number":"39-44-5323523"
     },
     {
         "id": 3,
-        "content": "Dan Abramov",
+        "name": "Dan Abramov",
         "number":"12-43-234345"
     },
     {
         "id": 4,
-        "content": "Mary Poppendieck",
+        "name": "Mary Poppendieck",
         "number":"39-23-6423122"
     }
 ]
@@ -76,13 +78,14 @@ app.get('/api/persons/:id',(request, response)=>{
 
 app.delete('/api/persons/:id',(request, response)=>{
     const id = Number(request.params.id)
-    const person = entries.find(entry=>entry.id===id)
+    entries = entries.filter(entry=>entry.id!==id)
+    console.log(id,entries)
     response.status(204).end()
 })
 
 const generatedId = () => {
     //const maxId = entries.length>0?Math.max(...entries.map(n=>n.id)):0
-    const maxId = Math.floor(Math.random()*entries.length)
+    const maxId = Math.floor(Math.random()*100)
     return maxId+1
 }
 const findDuplicate =() =>{
@@ -91,20 +94,20 @@ const findDuplicate =() =>{
 
 app.post('/api/persons',(request,response)=>{
     const person = request.body
-    const dupefound= entries.find(entry=>entry.content===person.content)
+    const dupefound= entries.find(entry=>entry.name===person.name)
     //console.log(dupefound)
     if(dupefound){
         //console.log("found dupe")
         return response.status(400).json({error:'name must be unique'})
     }
-    if(!person.content || !person.number){
+    if(!person.name || !person.number){
         return response.status(400).json({error:'content missing'})
     }
 
 
     const person2 = {
         id: generatedId(),
-        content: person.content,
+        name: person.name,
         number: person.number || false,
     }
     entries=entries.concat(person2)
