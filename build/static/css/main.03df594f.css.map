@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.03df594f.css","mappings":"AAAA,OACQ,WAER,CAEA,cAHQ,kBAMR,CAHA,OACQ,SAER","sources":["index.css"],"sourcesContent":[".notif{\n        color: green;\n        background: lightgrey;\n}\n\n.error{\n        color: red;\n        background: lightgrey;\n}\n"],"names":[],"sourceRoot":""}
