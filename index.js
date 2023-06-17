@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const mongoose = require('mongoose')
 const Person = require('./models/person')
 
 const app = express()
@@ -77,7 +76,7 @@ app.get('/api/persons', (request, response)=>{
         response.json(persons)
     })
 })
-/*
+
 app.get('/api/persons/:id',(request, response, next)=>{
     Person.findById(request.params.id).then(person=>{
         if(person){
@@ -87,7 +86,7 @@ app.get('/api/persons/:id',(request, response, next)=>{
         }
     }).catch(error=>next(error))
 })
-*/
+
 
 app.get('/info',(request, response)=>{
     response.send(`<p>Phonebook has info for ${entries.length}</p>
