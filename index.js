@@ -54,9 +54,6 @@ const app = http.createServer((request, response)=>{
 })
 */
 
-const logger = (request, response, next) => {
-  //console.log('Method:', request.method)
-}
 
 app.get('/',(request, response) => {
   response.send('<h1>hello world</h1>')
@@ -123,12 +120,13 @@ app.delete('/api/persons/:id',(request,response,next) => {
     }
   ).catch(error => next(error))
 })
-
+/*
 const generatedId = () => {
   //const maxId = entries.length>0?Math.max(...entries.map(n=>n.id)):0
   const maxId = Math.floor(Math.random()*100)
   return maxId+1
 }
+*/
 /*
 app.post('/api/persons',(request,response)=>{
     const person = request.body

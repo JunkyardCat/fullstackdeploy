@@ -8,7 +8,7 @@ console.log('connecting to', url)
 
 //const url = `mongodb+srv://fullstackmongodb:${password}@cluster0.0y8esyf.mongodb.net/personApp?retryWrites=true&w=majority`
 
-mongoose.connect(url).then(result => {
+mongoose.connect(url).then(() => {
   console.log('connected to MongoDB')
 }).catch((error) => {
   console.log('error connecting to Mongodb',error.message)
